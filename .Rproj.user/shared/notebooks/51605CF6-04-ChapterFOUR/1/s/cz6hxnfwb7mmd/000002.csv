@@ -1,0 +1,8 @@
+"0","tw_gam <- function(data){"
+"0","  gam(borrow_type ~ s(time, k = 30) +"
+"0","        s(populationsize, k = 10) +"
+"0","        s(influence, by = gender, k = 20) +"
+"0","        gender,"
+"0","      family = ""binomial"", method = ""REML"","
+"0","      data = data)"
+"0","}"

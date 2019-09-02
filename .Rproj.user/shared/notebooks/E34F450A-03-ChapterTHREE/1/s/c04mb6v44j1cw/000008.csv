@@ -1,0 +1,23 @@
+"0","courriel <- newspaper %>%
+  filter(lexical == ""email"") %>%
+  select(type, time) %>%
+  group_by(type, time) %>%
+  count() %>%
+  spread(type, n) %>%
+  mutate(english = replace_na(english, 0),
+         prescribed = replace_na(prescribed, 0),
+         alternative = replace_na(alternative, 0),
+         percentage_en = english / (english + prescribed + alternative),
+         percentage_pr = prescribed / (english + prescribed + alternative),
+         percentage_alt = alternative / (english + prescribed + alternative)) %>%
+  ungroup() %>%
+  select(time, source, percentage_en, percentage_pr, percentage_alt) %>%
+  gather(type, percentage, -time) %>%
+  mutate(type = as.factor(type),
+         type = recode(type, ""percentage_en"" = ""email"",
+                       ""percentage_alt"" = ""mail"",
+                       ""percentage_pr"" = ""courriel""),
+         type = relevel(as.factor(type), ref = ""courriel""))
+"
+"2","Error: `source` must evaluate to column positions or names, not a function
+"
